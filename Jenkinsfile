@@ -48,6 +48,14 @@ pipeline {
                 """
             }
         }
+        stage('Plan') { // passing variable from terraform which is dev.tfvars
+            steps {
+                sh """
+                    cd terraform
+                    terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+                """
+            }
+        }
         
     }
     
