@@ -40,7 +40,7 @@ pipeline {
         }
         
 
-        stage('Plan') { // passing variable from terraform which is dev.tfvars
+        stage('Apply') { // passing variable from terraform which is dev.tfvars
             steps {
                 sh """
                     cd terraform
