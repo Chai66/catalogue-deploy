@@ -30,7 +30,6 @@ pipeline {
                 """
             }
         }
-    stages {
         stage('Init') { //reconfiguring the backend.tf in dev when multi env is present
             steps {
                 sh """
@@ -40,9 +39,7 @@ pipeline {
             }
         }
         
-    }
 
-        stages {
         stage('Plan') { //reconfiguring the backend.tf in dev when multi env is present
             steps {
                 sh """
@@ -54,7 +51,7 @@ pipeline {
         }
         
     }
-    }
+    
       // post build
         post { 
         always { 
