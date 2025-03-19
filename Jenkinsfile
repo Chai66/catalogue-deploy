@@ -41,6 +41,7 @@ pipeline {
         }
         
     }
+
         stages {
         stage('Plan') { //reconfiguring the backend.tf in dev when multi env is present
             steps {
@@ -52,6 +53,7 @@ pipeline {
             }
         }
         
+    }
     }
       // post build
         post { 
