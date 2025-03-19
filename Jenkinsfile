@@ -40,11 +40,11 @@ pipeline {
         }
         
 
-        stage('Plan') { //reconfiguring the backend.tf in dev when multi env is present
+        stage('Plan') { // passing variable from terraform which is dev.tfvars
             steps {
                 sh """
                     cd terraform
-                    terraform plan -var-file=${params.environment}/${params.environment}
+                    terraform plan -var-file=${params.environment}/${params.environment}.
                     tfvars -var="app_version=${params.version}"
                 """
             }
