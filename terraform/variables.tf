@@ -22,3 +22,6 @@ variable "environment" {
 variable "zone_name" {
   default = "devopspractice123.online"
 }
+variable "app_version" {
+  
+}

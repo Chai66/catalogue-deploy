@@ -11,6 +11,7 @@ pipeline {
     options {
         timeout(time: 1, unit: 'HOURS') //it will allow to run this pipeline for 1 hour to execute
         disableConcurrentBuilds()  //this wont allow to run 2 builds at a time
+        ansiColor('xterm')
     }
     parameters {
         string(name: 'version', defaultValue: '', description: 'What is the artifact version?')
@@ -26,6 +27,27 @@ pipeline {
                 sh """
                 echo "version: ${params.version}"
                 echo "environment: ${params.environment}"
+                """
+            }
+        }
+    stages {
+        stage('Init') { //reconfiguring the backend.tf in dev when multi env is present
+            steps {
+                sh """
+                    cd terraform
+                    terraform init --backend-configure=${params.environment}/backend.tf -reconfigure
+                """
+            }
+        }
+        
+    }
+        stages {
+        stage('Plan') { //reconfiguring the backend.tf in dev when multi env is present
+            steps {
+                sh """
+                    cd terraform
+                    terraform plan -var-file=${params.environment}/${params.environment}
+                    tfvars -var="app_version=${params.version}"
                 """
             }
         }
